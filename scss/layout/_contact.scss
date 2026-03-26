@@ -1,11 +1,15 @@
 .contact {
     display: grid;
-    grid-template-columns: 0.75fr 1.8fr;
-    gap: 32px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+
+     @include respond(md) {
+        grid-template-columns: 0.75fr 1.8fr;
+        gap: 24px;
+    }
 
     @include respond(lg) {
         grid-template-columns: 0.75fr 1.8fr;
-        gap: 42px;
         align-items: start;
     }
 
@@ -19,7 +23,7 @@
         p {
             font-size: 1rem;
             line-height: 1.8;
-            color: $light-red;
+            color: $middle-red;
             margin-bottom: 18px;
         }
 
@@ -37,6 +41,7 @@
         input,
         textarea {
             width: 100%;
+            font-size: 0.9rem;
             border: none;
             background: $input-bg;
             padding: 14px 16px;
@@ -54,6 +59,7 @@
         }
 
         button {
+            font-size: 1rem;
             min-width: 120px;
             padding: 12px 24px;
             border: 2px solid black;
@@ -64,7 +70,7 @@
 
             &:hover {
                 background: $dark-red;
-                color: grey;
+                color: white;
             }
         }
     }
@@ -72,10 +78,10 @@
     &__row {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 14px;
 
-        @include respond(sm) {
+        @include respond(xs) {
             grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
     }
 }
