@@ -1,36 +1,36 @@
-img {
-    display: block;
-    width: 100%;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
 .page {
     max-width: 1440px;
     margin: 0 auto;
-    display: flex;
     min-height: 100vh;
+    min-height: 100dvh;
+
+    @include respond(md) {
+        display: flex;
+    }
 }
 
 .content {
-    width: calc(100% - $sidebar-width);
-    margin-left: $sidebar-width;
+    width: 100%;
+    margin-left: 0;
+
+    @include respond(md) {
+        width: calc(100% - #{$sidebar-width});
+        margin-left: $sidebar-width;
+    }
 }
 
 .section {
     padding: 56px 32px 25px;
-}
 
-.footer {
-    padding: 32px;
-    text-align: center;
-    color: $dark-red;
-    font-size: 0.95rem;
+    @include respond(xs) {
+        padding: 30px 12px 20px;
+    }
 
-    a:hover {
-        text-decoration: underline;
+    @include respond(sm) {
+        padding: 40px 24px 24px;
+    }
+
+    @include respond(md) {
+        padding: 56px 32px 25px;
     }
 }

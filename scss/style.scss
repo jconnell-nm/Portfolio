@@ -1,4 +1,6 @@
-@import 'base/variables';
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
 @import 'base/base';
 @import 'base/fonts';
 
@@ -7,6 +9,7 @@
 @import 'layout/hero';
 @import 'layout/projects';
 @import 'layout/contact';
+@import 'layout/footer';
 
 
 
