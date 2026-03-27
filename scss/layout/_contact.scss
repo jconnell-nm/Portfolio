@@ -4,24 +4,40 @@
     gap: 10px;
 
      @include respond(md) {
-        grid-template-columns: 0.75fr 1.8fr;
+        grid-template-columns: 1fr 1.6fr;
         gap: 24px;
     }
 
     @include respond(lg) {
-        grid-template-columns: 0.75fr 1.8fr;
         align-items: start;
     }
 
     &__info {
+        min-width: 0;
         h2 {
-            font-size: 2rem;
+            font-size: 1.75rem;
             color: $dark-red;
             margin-bottom: 18px;
+
+            @include respond(xs) {
+                font-size: 2.5rem;
+            }
+
+            @include respond(md) {
+                font-size: 2rem;
+            }
+
+            @include respond(lg) {
+                font-size: 2.5rem;
+            }
+
+            @include respond(xl) {
+                font-size: 3rem;
+            }
         }
 
         p {
-            font-size: 1rem;
+            font-size: clamp(1.05rem, 1.5vw, 1.3rem);
             line-height: 1.8;
             color: $middle-red;
             margin-bottom: 18px;
@@ -29,15 +45,22 @@
 
         a {
             display: block;
-            width: fit-content;
-            font-size: 1.4rem;
+            font-size: clamp(1.25rem, 1.8vw, 1.6rem);
             font-weight: 600;
             margin-bottom: 10px;
             color: $dark-red;
+            width: 100%;
+            overflow-wrap: anywhere;
         }
     }
 
     &__form {
+        min-width: 0;
+        background: $sidebar-bg;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
         input,
         textarea {
             width: 100%;

@@ -140,7 +140,7 @@ textarea {
   min-height: 100vh;
   min-height: 100dvh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   padding: 2rem 1rem;
   background: #f7f7f7;
@@ -579,7 +579,7 @@ textarea {
 @media (min-width: 768px) {
   /* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
   .contact {
-    grid-template-columns: 0.75fr 1.8fr;
+    grid-template-columns: 1fr 1.6fr;
     gap: 24px;
   }
 }
@@ -587,37 +587,79 @@ textarea {
 @media (min-width: 992px) {
   /* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
   .contact {
-    grid-template-columns: 0.75fr 1.8fr;
     align-items: start;
   }
 }
 
+/* line 15, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.contact__info {
+  min-width: 0;
+}
+
 /* line 17, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__info h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   color: #800517;
   margin-bottom: 18px;
 }
 
-/* line 23, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+@media (min-width: 280px) {
+  /* line 17, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  .contact__info h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  /* line 17, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  .contact__info h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  /* line 17, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  .contact__info h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* line 17, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  .contact__info h2 {
+    font-size: 3rem;
+  }
+}
+
+/* line 39, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__info p {
-  font-size: 1rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
   line-height: 1.8;
   color: #B22234;
   margin-bottom: 18px;
 }
 
-/* line 30, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 46, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__info a {
   display: block;
-  width: fit-content;
-  font-size: 1.4rem;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
   font-weight: 600;
   margin-bottom: 10px;
   color: #800517;
+  width: 100%;
+  overflow-wrap: anywhere;
 }
 
-/* line 41, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 57, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.contact__form {
+  min-width: 0;
+  background: #f7f7f7;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* line 64, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form input,
 .contact__form textarea {
   width: 100%;
@@ -629,19 +671,19 @@ textarea {
   color: #800517;
 }
 
-/* line 51, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 74, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form input::placeholder,
 .contact__form textarea::placeholder {
   color: #999;
 }
 
-/* line 56, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 79, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form textarea {
   resize: vertical;
   min-height: 200px;
 }
 
-/* line 61, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 84, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form button {
   font-size: 1rem;
   min-width: 120px;
@@ -653,20 +695,20 @@ textarea {
   transition: 0.25s ease;
 }
 
-/* line 71, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 94, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form button:hover {
   background: #800517;
   color: white;
 }
 
-/* line 78, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 101, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__row {
   display: grid;
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 280px) {
-  /* line 78, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  /* line 101, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
   .contact__row {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
