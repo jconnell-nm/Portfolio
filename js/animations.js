@@ -13,23 +13,36 @@ function animateText({
     function type() {
         element.textContent = "";
 
-        text.split("").forEach((char, i) => {
-            const span = document.createElement("span");
+        let delay = 0;
 
-            // Preserve spaces
-            span.textContent = char === " " ? "\u00A0" : char;
-            
-            span.style.opacity = "0";
-            span.style.display = "inline-block";
-            span.style.transform = "translateY(20px)";
-            span.style.transition = `opacity 0.3s ease, transform 0.3s ease`;
-            
-            element.appendChild(span);
+        const words = text.split(" ");
 
-            setTimeout(() => {
-                span.style.opacity = "1";
-                span.style.transform = "translateY(0)";
-            }, i * speed);
+        words.forEach((word, wordIndex) => {
+            const wordSpan = document.createElement("span");
+            wordSpan.style.display = "inline-block";
+            wordSpan.style.whiteSpace = "nowrap";
+
+            word.split("").forEach((char, charIndex) => {
+                const charSpan = document.createElement("span");
+                charSpan.textContent = char;
+                charSpan.style.opacity = "0";
+                charSpan.style.display = "inline-block";
+                charSpan.style.transform = "translateY(20px)";
+                charSpan.style.transition = "all 0.3s ease";
+
+                wordSpan.appendChild(charSpan);
+
+                setTimeout(() => {
+                    charSpan.style.opacity = "1";
+                    charSpan.style.transform = "translateY(0)";
+                }, delay);
+                
+                delay += speed;
+            });
+
+            const space = document.createTextNode(" ");
+            element.appendChild(wordSpan);
+            element.appendChild(space);
         });
     }
 

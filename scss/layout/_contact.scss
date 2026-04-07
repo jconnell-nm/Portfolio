@@ -65,10 +65,10 @@
         textarea {
             width: 100%;
             font-size: 0.9rem;
-            border: none;
+            border: 2px solid transparent;
             background: $input-bg;
             padding: 14px 16px;
-            margin-bottom: 14px;
+            margin: 5px 0;
             color: $dark-red;
 
             &::placeholder {
@@ -82,6 +82,7 @@
         }
 
         button {
+            margin-top: 10px;
             font-size: 1rem;
             min-width: 120px;
             padding: 12px 24px;
@@ -107,4 +108,21 @@
             gap: 10px;
         }
     }
+}
+
+.error {
+    color: $light-red;
+    font-size: 0.85rem;
+    display: block;
+    font-weight: 500;
+}
+
+.contact__form input.valid,
+.contact__form textarea.valid {
+    border: 2px solid forestgreen;
+}
+
+.contact__form input.invalid,
+.contact__form textarea.invalid {
+    border: 2px solid $light-red;
 }

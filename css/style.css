@@ -664,10 +664,10 @@ textarea {
 .contact__form textarea {
   width: 100%;
   font-size: 0.9rem;
-  border: none;
+  border: 2px solid transparent;
   background: #e9e9e9;
   padding: 14px 16px;
-  margin-bottom: 14px;
+  margin: 5px 0;
   color: #800517;
 }
 
@@ -685,6 +685,7 @@ textarea {
 
 /* line 84, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form button {
+  margin-top: 10px;
   font-size: 1rem;
   min-width: 120px;
   padding: 12px 24px;
@@ -695,24 +696,44 @@ textarea {
   transition: 0.25s ease;
 }
 
-/* line 94, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 95, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__form button:hover {
   background: #800517;
   color: white;
 }
 
-/* line 101, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+/* line 102, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
 .contact__row {
   display: grid;
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 280px) {
-  /* line 101, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+  /* line 102, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
   .contact__row {
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
+}
+
+/* line 113, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.error {
+  color: #DC143C;
+  font-size: 0.85rem;
+  display: block;
+  font-weight: 500;
+}
+
+/* line 120, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.contact__form input.valid,
+.contact__form textarea.valid {
+  border: 2px solid forestgreen;
+}
+
+/* line 125, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.contact__form input.invalid,
+.contact__form textarea.invalid {
+  border: 2px solid #DC143C;
 }
 
 /* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_footer.scss */
