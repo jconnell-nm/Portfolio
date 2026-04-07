@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
     initHeroAnimations();
     initMobileNav();
     initContactForm();
-
-    
+    initPageTransitions();
 });
 
 function initHeroAnimations() {
     const heroTitle = document.getElementById("hero-title");
     const heroText = document.getElementById("hero-text");
+
+    if (!heroTitle || !heroText) return;
 
     // Animate the hero title
     animateText({
@@ -65,6 +66,17 @@ function initContactForm() {
     const subjectInput = document.querySelector("#subject");
     const messageInput = document.querySelector("#message");
 
+    if (
+        !form ||
+        !firstNameInput ||
+        !lastNameInput ||
+        !emailInput ||
+        !subjectInput ||
+        !messageInput
+    ) {
+        return;
+    }
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     firstNameInput.addEventListener("input", () => validateFirstName());
@@ -89,9 +101,16 @@ function initContactForm() {
         const isMessageValid = validateMessage();
 
         if (isFirstNameValid && isLastNameValid && isEmailValid && isSubjectValid && isMessageValid) {
-            alert("Thank you for your message! I'll get back to you soon.");
+            const successMessage = document.getElementById("form-success");
+
             form.reset();
             clearValidationState();
+
+            successMessage.classList.add("show");
+
+            setTimeout(() => {
+                successMessage.classList.remove("show");
+            }, 4000);
         }
     });
 
@@ -183,4 +202,74 @@ function initContactForm() {
             }
         });
     }
+}
+
+function initPageTransitions() {
+    const pageContent = document.querySelector(".content");
+    if (!pageContent) return;
+
+    pageContent.classList.add("is-animating", "is-entering");
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            pageContent.classList.remove("is-entering");
+            pageContent.classList.add("is-visible");
+        });
+    });
+
+    const links = document.querySelectorAll("a[href]");
+
+    links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+            if (
+                e.defaultPrevented ||
+                e.button !== 0 ||
+                e.metaKey ||
+                e.ctrlKey ||
+                e.shiftKey ||
+                e.altKey
+            ) {
+                return;
+            }
+
+            const href = link.getAttribute("href");
+
+            if (
+                !href ||
+                href.startsWith("mailto:") ||
+                href.startsWith("tel:") ||
+                href.startsWith("javascript:") ||
+                link.target === "_blank" ||
+                link.hasAttribute("download")
+            ) {
+                return;
+            }
+
+            const targetUrl = new URL(link.href, window.location.href);
+            const currentUrl = new URL(window.location.href);
+
+            if (targetUrl.origin !== currentUrl.origin) return;
+
+            const samePath =
+                targetUrl.pathname.replace(/\/$/, "") === currentUrl.pathname.replace(/\/$/, "");
+            const sameSearch = targetUrl.search === currentUrl.search;
+
+            // same document, including hash navigation
+            if (samePath && sameSearch) {
+                return;
+            }
+
+            e.preventDefault();
+
+            pageContent.classList.remove("is-visible");
+            pageContent.classList.add("is-leaving");
+
+            const navigate = () => {
+                window.location.href = targetUrl.href;
+            };
+
+            pageContent.addEventListener("transitionend", navigate, { once: true });
+            setTimeout(navigate, 350);
+        });
+    });
 }

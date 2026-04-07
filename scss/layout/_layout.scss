@@ -1,6 +1,5 @@
 .page {
     position: relative;
-    max-width: 1440px;
     margin: 0 auto;
     min-height: 100vh;
     min-height: 100dvh;
@@ -11,13 +10,35 @@
 }
 
 .content {
+    opacity: 1;
+    transform: translateY(0);
     width: 100%;
     margin-left: 0;
+    will-change: opacity, transform;
 
     @include respond(md) {
         width: calc(100% - #{$sidebar-width});
         margin-left: $sidebar-width;
     }
+}
+
+.content.is-animating {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.content.is-entering {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.content.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.content.is-leaving {
+    opacity: 0;
+    transform: translateY(-12px);
 }
 
 .section {
