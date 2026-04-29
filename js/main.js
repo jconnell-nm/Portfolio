@@ -1,7 +1,6 @@
 import { animateText, animateTextLoop } from "./animations.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Initialize hero animations
     initHeroAnimations();
     initMobileNav();
     initContactForm();
@@ -92,26 +91,11 @@ function initContactForm() {
     messageInput.addEventListener("blur", () => validateMessage());
 
     form.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const isFirstNameValid = validateFirstName();
-        const isLastNameValid = validateLastName();
-        const isEmailValid = validateEmail();
-        const isSubjectValid = validateSubject();
-        const isMessageValid = validateMessage();
-
-        if (isFirstNameValid && isLastNameValid && isEmailValid && isSubjectValid && isMessageValid) {
-            const successMessage = document.getElementById("form-success");
-
-            form.reset();
-            clearValidationState();
-
-            successMessage.classList.add("show");
-
-            setTimeout(() => {
-                successMessage.classList.remove("show");
-            }, 4000);
-        }
+        validateFirstName();
+        validateLastName();
+        validateEmail();
+        validateSubject();
+        validateMessage();
     });
 
     function validateFirstName() {

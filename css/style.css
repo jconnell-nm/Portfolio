@@ -464,6 +464,11 @@ textarea {
   }
 }
 
+/* line 216, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_sidebar.scss */
+a[aria-current="page"] {
+  color: #B22234;
+}
+
 /* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_hero.scss */
 .hero {
   position: relative;

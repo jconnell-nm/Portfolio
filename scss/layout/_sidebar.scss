@@ -212,3 +212,7 @@
         background: transparent;
     }
 }
+
+a[aria-current="page"] {
+    color: $middle-red;
+}
