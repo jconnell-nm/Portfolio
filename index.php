@@ -19,13 +19,13 @@ require __DIR__ . '/partials/sidebar.php';
     <div class="projects-grid">
         <div class="project-card">
             <img src="img/project-1.png" alt="Project One">
-            <h2>Project One</h2>
-            <a href="#">View Project &#8594;</a>
+            <h2>Netmatters Site</h2>
+            <a target="_blank" href="http://netmatters.jonathan-connell.netmatters-scs.co.uk/">View Project &#8594;</a>
         </div>
         <div class="project-card">
             <img src="img/project-2.png" alt="Project Two">
-            <h2>Project Two</h2>
-            <a href="#">View Project &#8594;</a>
+            <h2>JS Array</h2>
+            <a target="_blank" href="http://js-array.jonathan-connell.netmatters-scs.co.uk/">View Project &#8594;</a>
         </div>
         <div class="project-card">
             <img src="img/project-3.png" alt="Project Three">
@@ -63,28 +63,35 @@ require __DIR__ . '/partials/sidebar.php';
         </p>
     </div>
 
-    <form class="contact__form">
+    <form class="contact__form" id="contact-form" method="POST" action="submit-contact.php" novalidate>
+        <div id="form-message" class="form-message">
+            <p>Thank you for your message! I'll get back to you soon.</p>
+        </div>
         <div class="contact__row">
             <div class="first-name-input">
-                <input type="text" id="first-name" placeholder="First Name*">
+                <input type="text" id="first-name" name="first_name" placeholder="First Name*">
                 <span class="error"></span>
             </div>
             <div class="last-name-input">
-                <input type="text" id="last-name" placeholder="Last Name*">
+                <input type="text" id="last-name" name="last_name" placeholder="Last Name*">
                 <span class="error"></span>
             </div>
         </div>
-        <input type="email" id="email" placeholder="Email Address*">
+
+        <input type="email" id="email" name="email" placeholder="Email Address*">
         <span class="error"></span>
-        <input type="text" id="subject" placeholder="Subject">
+
+        <input type="tel" id="phone" name="phone" placeholder="Phone Number">
         <span class="error"></span>
-        <textarea id="message" placeholder="Message" rows="8"></textarea>
+
+        <input type="text" id="subject" name="subject" placeholder="Subject*">
         <span class="error"></span>
+
+        <textarea id="message" name="message" placeholder="Message*" rows="8"></textarea>
+        <span class="error"></span>
+
         <button type="submit">Send Message</button>
     </form>
-    <div id="form-success" class="form-success">
-        <p>Thank you for your message! I'll get back to you soon.</p>
-    </div>
 </section>
 <footer class="footer">
     <a href="#top">&#8963;<br>Back to Top</a>

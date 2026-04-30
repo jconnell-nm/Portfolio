@@ -57,69 +57,72 @@ function initMobileNav() {
 }
 
 function initContactForm() {
-    const form = document.querySelector("form");
+    const form = document.querySelector("#contact-form");
+    const formMessage = document.querySelector("#form-message");
 
     const firstNameInput = document.querySelector("#first-name");
     const lastNameInput = document.querySelector("#last-name");
     const emailInput = document.querySelector("#email");
+    const phoneInput = document.querySelector("#phone");
     const subjectInput = document.querySelector("#subject");
     const messageInput = document.querySelector("#message");
 
-    if (
-        !form ||
-        !firstNameInput ||
-        !lastNameInput ||
-        !emailInput ||
-        !subjectInput ||
-        !messageInput
-    ) {
+    if (!form || !firstNameInput || !lastNameInput || !emailInput || !phoneInput || !subjectInput || !messageInput) {
         return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    firstNameInput.addEventListener("input", () => validateFirstName());
-    lastNameInput.addEventListener("input", () => validateLastName());
-    emailInput.addEventListener("input", () => validateEmail());
-    subjectInput.addEventListener("input", () => validateSubject());
-    messageInput.addEventListener("input", () => validateMessage());
+    const phonePattern = /^\+?[0-9\s().-]{7,20}$/;
 
-    firstNameInput.addEventListener("blur", () => validateFirstName());
-    lastNameInput.addEventListener("blur", () => validateLastName());
-    emailInput.addEventListener("blur", () => validateEmail());
-    subjectInput.addEventListener("blur", () => validateSubject());
-    messageInput.addEventListener("blur", () => validateMessage());
+    firstNameInput.addEventListener("input", validateFirstName);
+    lastNameInput.addEventListener("input", validateLastName);
+    emailInput.addEventListener("input", validateEmail);
+    phoneInput.addEventListener("input", validatePhone);
+    subjectInput.addEventListener("input", validateSubject);
+    messageInput.addEventListener("input", validateMessage);
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
         validateFirstName();
         validateLastName();
         validateEmail();
+        validatePhone();
         validateSubject();
         validateMessage();
+
+        showFormMessage("Sending your message...", true);
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                showFormMessage(result.message || "Please check the form and try again.", false);
+                if (result.errors) showServerErrors(result.errors);
+                return;
+            }
+
+            clearValidationState();
+            form.reset();
+            showFormMessage(result.message, true);
+        } catch {
+            showFormMessage("Sorry, your message could not be sent. Please try again.", false);
+        }
     });
 
     function validateFirstName() {
-        const value = firstNameInput.value.trim();
-
-        if (value === "") {
-            showError(firstNameInput, "First name is required.");
-            return false;
-        }
-
-        showSuccess(firstNameInput);
-        return true;
+        return validateRequired(firstNameInput, "First name is required.");
     }
 
     function validateLastName() {
-        const value = lastNameInput.value.trim();
-
-        if (value === "") {
-            showError(lastNameInput, "Last name is required.");
-            return false;
-        }
-
-        showSuccess(lastNameInput);
-        return true;
+        return validateRequired(lastNameInput, "Last name is required.");
     }
 
     function validateEmail() {
@@ -128,7 +131,9 @@ function initContactForm() {
         if (value === "") {
             showError(emailInput, "Email is required.");
             return false;
-        } else if (!emailPattern.test(value)) {
+        }
+
+        if (!emailPattern.test(value)) {
             showError(emailInput, "Please enter a valid email address.");
             return false;
         }
@@ -137,27 +142,33 @@ function initContactForm() {
         return true;
     }
 
-    function validateSubject() {
-        const value = subjectInput.value.trim();
+    function validatePhone() {
+        const value = phoneInput.value.trim();
 
-        if (value === "") {
-            showError(subjectInput, "Subject is required.");
+        if (value !== "" && !phonePattern.test(value)) {
+            showError(phoneInput, "Please enter a valid phone number.");
             return false;
         }
 
-        showSuccess(subjectInput);
+        showSuccess(phoneInput);
         return true;
     }
 
-    function validateMessage() {
-        const value = messageInput.value.trim();
+    function validateSubject() {
+        return validateRequired(subjectInput, "Subject is required.");
+    }
 
-        if (value === "") {
-            showError(messageInput, "Message is required.");
+    function validateMessage() {
+        return validateRequired(messageInput, "Message is required.");
+    }
+
+    function validateRequired(input, message) {
+        if (input.value.trim() === "") {
+            showError(input, message);
             return false;
         }
 
-        showSuccess(messageInput);
+        showSuccess(input);
         return true;
     }
 
@@ -175,10 +186,41 @@ function initContactForm() {
         input.classList.add("valid");
     }
 
-    function clearValidationState() {
-        const fields = [firstNameInput, lastNameInput, emailInput, subjectInput, messageInput];
+    function showServerErrors(errors) {
+        const fields = {
+            first_name: firstNameInput,
+            last_name: lastNameInput,
+            email: emailInput,
+            phone: phoneInput,
+            subject: subjectInput,
+            message: messageInput
+        };
 
-        fields.forEach((field) => {
+        Object.entries(errors).forEach(([key, message]) => {
+            if (fields[key]) {
+                showError(fields[key], message);
+            }
+        });
+    }
+
+    function showFormMessage(message, success) {
+        const p = formMessage.querySelector("p");
+
+        p.textContent = message;
+
+        formMessage.classList.add("show");
+        formMessage.classList.toggle("success", success);
+        formMessage.classList.toggle("error", !success);
+
+        formMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        setTimeout(() => {
+            formMessage.classList.remove("show");
+        }, 5000);
+    }
+
+    function clearValidationState() {
+        [firstNameInput, lastNameInput, emailInput, phoneInput, subjectInput, messageInput].forEach((field) => {
             field.classList.remove("valid", "invalid");
             const error = field.nextElementSibling;
             if (error && error.classList.contains("error")) {

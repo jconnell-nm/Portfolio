@@ -127,20 +127,39 @@
     border: 2px solid $light-red;
 }
 
-.form-success {
-    margin-top: 1rem;
-    padding: 12px 16px;
-    border-radius: 6px;
-    background-color: $sidebar-bg;
-    color: black;
+.form-message {
+    max-height: 0;
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    display: none;
+    overflow: hidden;
+    margin-bottom: 0;
+    padding: 0 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition:
+        opacity 0.3s ease,
+        max-height 0.3s ease,
+        margin-bottom 0.3s ease,
+        padding 0.3s ease;
 }
 
-.form-success.show {
-    display: block;
+.form-message.show {
+    max-height: 120px;
     opacity: 1;
-    transform: translateY(0);
+    margin-bottom: 20px;
+    padding: 12px 16px;
+}
+
+.form-message.success {
+    background-color: forestgreen;
+    color: white;
+}
+
+.form-message.error {
+    background-color: $light-red;
+    color: white;
+}
+
+.form-message p {
+    margin: 0;
 }

@@ -474,7 +474,7 @@ a[aria-current="page"] {
   position: relative;
   min-height: calc(100vh - 80px);
   min-height: calc(100dvh - 80px);
-  background: url("../img/hero-bg.jpg") center/cover no-repeat;
+  background: url("../img/hero-bg.webp") center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -569,15 +569,16 @@ a[aria-current="page"] {
   object-fit: cover;
   margin-bottom: 14px;
   transition: 0.25s ease;
+  aspect-ratio: 16 / 9;
 }
 
-/* line 26, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
+/* line 27, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
 .project-card img:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* line 32, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
+/* line 33, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
 .project-card h2 {
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   line-height: 1.2;
@@ -585,7 +586,7 @@ a[aria-current="page"] {
   margin-bottom: 8px;
 }
 
-/* line 39, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
+/* line 40, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
 .project-card a {
   display: inline-flex;
   gap: 8px;
@@ -595,7 +596,7 @@ a[aria-current="page"] {
   font-weight: 500;
 }
 
-/* line 47, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
+/* line 48, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_projects.scss */
 .project-card a:hover {
   text-decoration: underline;
 }
@@ -768,23 +769,58 @@ a[aria-current="page"] {
 }
 
 /* line 130, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
-.form-success {
-  margin-top: 1rem;
-  padding: 12px 16px;
-  border-radius: 6px;
-  background-color: #f7f7f7;
-  color: black;
+.form-message {
+  max-height: 0;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  display: none;
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin-bottom 0.3s ease, padding 0.3s ease;
 }
 
-/* line 142, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
-.form-success.show {
-  display: block;
+/* line 146, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.form-message.show {
+  max-height: 120px;
   opacity: 1;
-  transform: translateY(0);
+  margin-bottom: 20px;
+  padding: 12px 16px;
+}
+
+/* line 153, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.form-message.success {
+  background-color: forestgreen;
+  color: white;
+}
+
+/* line 158, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.form-message.error {
+  background-color: #DC143C;
+  color: white;
+}
+
+/* line 163, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_contact.scss */
+.form-message p {
+  margin: 0;
+}
+
+/* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_coding.scss */
+.code-example {
+  background: #1f1f1f;
+  color: #f8f8f2;
+  padding: 1.5rem;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+
+/* line 12, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_coding.scss */
+.code-example code {
+  font-family: Consolas, Monaco, "Courier New", monospace;
 }
 
 /* line 1, ../../../../../Users/jonathanconnell/Documents/Portfolio/scss/layout/_footer.scss */
